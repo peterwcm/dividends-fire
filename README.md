@@ -1,5 +1,7 @@
 # Dividends FIRE
 
+A FIRE (financial independence, retire early) calculator using dividend growth investing strategy
+
 ## Project setup
 ```
 yarn install
