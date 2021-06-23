@@ -2,6 +2,12 @@
 
 A FIRE (financial independence, retire early) calculator using dividend growth investing strategy
 
+## Features
+- Vue 3
+- Sass/SCSS (with dart-sass)
+- Unit Testing with Jest
+- E2E Testing with Cypress
+
 ## Project setup
 ```
 yarn install
