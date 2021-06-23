@@ -1,4 +1,4 @@
-# dividends-fire
+# Dividends FIRE
 
 ## Project setup
 ```
