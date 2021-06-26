@@ -2,34 +2,42 @@
   <div class="home">
     <Card>
       <template #content>
-        <h5>Calculator</h5>
+        <h5>FIRE Calculator</h5>
         <div class="p-grid p-fluid">
-          <div class="p-col-12 p-md-4">
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon">
-                <i class="pi pi-user"></i>
-              </span>
-              <InputText placeholder="Username" />
-            </div>
-          </div>
-
           <div class="p-col-12 p-md-4">
             <div class="p-field">
               <label for="capital">Capital</label>
               <div class="p-inputgroup">
                 <span class="p-inputgroup-addon">$</span>
 
-                <InputNumber v-model="capital" suffix="%" :min="0" :max="100" />
+                <InputNumber v-model="capital" placeholder="e.g. 200000" suffix="%" :min="0" :max="100" />
               </div>
 
-              <small id="capital-help">Enter your username to reset your password.</small>
+              <small id="capital-help">Enter your default capitcal.</small>
             </div>
           </div>
-
           <div class="p-col-12 p-md-4">
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon">W</span>
-              <InputText placeholder="Website" />
+            <div class="p-field">
+              <label for="capital">Capital</label>
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon">$</span>
+
+                <InputNumber v-model="capital" placeholder="e.g. 200000" suffix="%" :min="0" :max="100" />
+              </div>
+
+              <small id="capital-help">Enter your default capitcal.</small>
+            </div>
+          </div>
+          <div class="p-col-12 p-md-4">
+            <div class="p-field">
+              <label for="capital">Capital</label>
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon">$</span>
+
+                <InputNumber v-model="capital" placeholder="e.g. 200000" suffix="%" :min="0" :max="100" />
+              </div>
+
+              <small id="capital-help">Enter your default capitcal.</small>
             </div>
           </div>
         </div>
