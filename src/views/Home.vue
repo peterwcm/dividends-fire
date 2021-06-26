@@ -87,7 +87,11 @@
                   {{formatCurrency(slotProps.data.annualDividends)}}
                 </template>
               </Column>
-              <Column field="yield" header="Yield"></Column>
+              <Column field="dividendYield" header="Dividend Yield">
+                <template #body="slotProps">
+                  {{formatPercent(slotProps.data.dividendYield)}}
+                </template>
+              </Column>
               <Column field="monthlyExpense" header="Monthly Expense">
                 <template #body="slotProps">
                   {{formatCurrency(slotProps.data.monthlyExpense)}}
@@ -118,31 +122,31 @@ export default {
   name: 'Home',
   data() {
     return {
-      capital: 200000,
-      annualExpense: 100000,
-      dividendYield: 4,
-      dividendGrowthRate: 20,
-      dividendTaxRate: 30,
+      capital: 3000000,
+      annualExpense: 300000,
+      dividendYield: 8,
+      dividendGrowthRate: 1,
+      dividendTaxRate: 0,
       inflationRate: 3,
       dividendsSummary: [
         {
           year: 1,
           annualDividends: 240000,
-          yield: '8.00%',
+          dividendYield: 0.08,
           monthlyExpense: 25000,
           monthlyDividends: 20000,
         },
         {
           year: 2,
           annualDividends: 242400,
-          yield: '8.08%',
+          dividendYield: 0.0808,
           monthlyExpense: 25750,
           monthlyDividends: 20200,
         },
         {
           year: 3,
           annualDividends: 244824,
-          yield: '8.16%',
+          dividendYield: 0.0816,
           monthlyExpense: 26523,
           monthlyDividends: 40402,
         },
@@ -155,19 +159,35 @@ export default {
       this.dividendsSummary = [];
 
       for (let i = 0; i < years; i++) {
+        const dividendYield =
+          (this.dividendYield *
+            Math.pow(1 + this.dividendGrowthRate / 100, i)) /
+          100;
+        const annualDividends = this.capital * dividendYield;
+
         this.dividendsSummary.push({
           year: i + 1,
-          annualDividends: 244824,
-          yield: '8.16%',
-          monthlyExpense: 26523,
-          monthlyDividends: 40402,
+          annualDividends,
+          dividendYield,
+          monthlyExpense:
+            (this.annualExpense / 12) *
+            Math.pow(1 + this.inflationRate / 100, i),
+          monthlyDividends:
+            (annualDividends / 12) * (1 - this.dividendTaxRate / 100),
         });
       }
     },
+
     formatCurrency(value) {
       return value.toLocaleString('en-US', {
         style: 'currency',
         currency: 'USD',
+      });
+    },
+    formatPercent(value) {
+      return value.toLocaleString('en-US', {
+        style: 'percent',
+        minimumFractionDigits: 2,
       });
     },
     exportCSV() {
