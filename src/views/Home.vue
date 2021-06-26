@@ -74,8 +74,7 @@
           </div>
 
           <div class="p-col-12 p-lg-7">
-            <DataTable ref="table" exportFilename="Summary of Return" :value="dividendsSummary"
-                       responsiveLayout="scroll">
+            <DataTable ref="table" exportFilename="Summary of Return" :value="dividendsSummary">
               <template #header>
                 <div class="p-text-right">
                   <Button icon="pi pi-external-link" label="Export" @click="exportCSV($event)" />
