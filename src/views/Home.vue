@@ -2,7 +2,7 @@
   <div class="home">
     <Card>
       <template #content>
-        <h5>Addons</h5>
+        <h5>Calculator</h5>
         <div class="p-grid p-fluid">
           <div class="p-col-12 p-md-4">
             <div class="p-inputgroup">
@@ -14,10 +14,15 @@
           </div>
 
           <div class="p-col-12 p-md-4">
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon">$</span>
-              <InputNumber v-model="value2" suffix="%" :min="0" :max="100" />
-              <span class="p-inputgroup-addon">.00</span>
+            <div class="p-field">
+              <label for="capital">Capital</label>
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon">$</span>
+
+                <InputNumber v-model="capital" suffix="%" :min="0" :max="100" />
+              </div>
+
+              <small id="capital-help">Enter your username to reset your password.</small>
             </div>
           </div>
 
@@ -41,7 +46,7 @@
 
 <script>
 export default {
-  name: "Home",
+  name: 'Home',
   data() {
     return {
       message: null,
@@ -50,7 +55,7 @@ export default {
   },
   methods: {
     greet() {
-      this.message = "Hello " + this.text;
+      this.message = 'Hello ' + this.text;
     },
   },
 };
