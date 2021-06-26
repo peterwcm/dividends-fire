@@ -72,11 +72,36 @@
           </div>
         </form>
 
-        <DataTable :value="cars">
-          <Column field="vin" header="Vin"></Column>
+        <DataTable ref="table" exportFilename="Summary of Return" :value="cars" responsiveLayout="scroll">
+          <template #header>
+            <div class="p-text-right">
+              <Button icon="pi pi-external-link" label="Export" @click="exportCSV($event)" />
+            </div>
+          </template>
           <Column field="year" header="Year"></Column>
-          <Column field="brand" header="Brand"></Column>
-          <Column field="color" header="Color"></Column>
+          <Column field="annualDividends" header="Annual Dividends">
+            <template #body="slotProps">
+              {{formatCurrency(slotProps.data.annualDividends)}}
+            </template>
+          </Column>
+          <Column field="yield" header="Yield"></Column>
+          <Column field="monthlyExpense" header="Monthly Expense">
+            <template #body="slotProps">
+              {{formatCurrency(slotProps.data.monthlyExpense)}}
+            </template>
+          </Column>
+          <Column field="monthlyDividends" header="Monthly Dividends (After Tax)">
+            <template #body="slotProps">
+              {{formatCurrency(slotProps.data.monthlyDividends)}}
+            </template>
+          </Column>
+          <Column header="FIRE">
+            <template #body="slotProps">
+              <Badge :value="slotProps.data.monthlyDividends < slotProps.data.monthlyExpense ? 'No' : 'Yes' "
+                     :severity="slotProps.data.monthlyDividends < slotProps.data.monthlyExpense ? 'danger' : 'success' ">
+              </Badge>
+            </template>
+          </Column>
         </DataTable>
       </template>
     </Card>
@@ -91,22 +116,42 @@ export default {
       message: null,
       text: null,
       cars: [
-        { brand: 'Volkswagen', year: 2012, color: 'Orange', vin: 'dsad231ff' },
-        { brand: 'Audi', year: 2011, color: 'Black', vin: 'gwregre345' },
-        { brand: 'Renault', year: 2005, color: 'Gray', vin: 'h354htr' },
-        { brand: 'BMW', year: 2003, color: 'Blue', vin: 'j6w54qgh' },
-        { brand: 'Mercedes', year: 1995, color: 'Orange', vin: 'hrtwy34' },
-        { brand: 'Volvo', year: 2005, color: 'Black', vin: 'jejtyj' },
-        { brand: 'Honda', year: 2012, color: 'Yellow', vin: 'g43gr' },
-        { brand: 'Jaguar', year: 2013, color: 'Orange', vin: 'greg34' },
-        { brand: 'Ford', year: 2000, color: 'Black', vin: 'h54hw5' },
-        { brand: 'Fiat', year: 2013, color: 'Red', vin: '245t2s' },
+        {
+          year: 1,
+          annualDividends: 240000,
+          yield: '8.00%',
+          monthlyExpense: 25000,
+          monthlyDividends: 20000,
+        },
+        {
+          year: 2,
+          annualDividends: 242400,
+          yield: '8.08%',
+          monthlyExpense: 25750,
+          monthlyDividends: 20200,
+        },
+        {
+          year: 3,
+          annualDividends: 244824,
+          yield: '8.16%',
+          monthlyExpense: 26523,
+          monthlyDividends: 40402,
+        },
       ],
     };
   },
   methods: {
     greet() {
       this.message = 'Hello ' + this.text;
+    },
+    formatCurrency(value) {
+      return value.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      });
+    },
+    exportCSV() {
+      this.$refs.table.exportCSV();
     },
   },
 };

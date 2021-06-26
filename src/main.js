@@ -3,12 +3,13 @@ import App from './App.vue'
 import router from './router'
 
 import PrimeVue from 'primevue/config';
-import InputText from 'primevue/inputtext';
-import InputNumber from 'primevue/inputnumber';
+import Badge from 'primevue/badge';
 import Button from 'primevue/button';
 import Card from 'primevue/card';
-import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
+import DataTable from 'primevue/datatable';
+import InputNumber from 'primevue/inputnumber';
+import InputText from 'primevue/inputtext';
 
 import 'primevue/resources/themes/saga-green/theme.css'
 import 'primevue/resources/primevue.min.css'
@@ -20,11 +21,12 @@ const app = createApp(App);
 app.use(router);
 app.use(PrimeVue, {ripple: true});
 
-app.component('InputText', InputText);
-app.component('InputNumber', InputNumber);
+app.component('Badge', Badge);
 app.component('Button', Button);
 app.component('Card', Card);
-app.component('DataTable', DataTable);
 app.component('Column', Column);
+app.component('DataTable', DataTable);
+app.component('InputNumber', InputNumber);
+app.component('InputText', InputText);
 
 app.mount('#app')
