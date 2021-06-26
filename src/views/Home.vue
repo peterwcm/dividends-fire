@@ -5,29 +5,25 @@
         <h5>FIRE Calculator</h5>
 
         <div class="p-grid">
-          <div class="p-col-12 p-md-5">
-            <form @submit.prevent="greet">
+          <div class="p-col-12 p-lg-5">
+            <form @submit.prevent="calculate">
 
               <div class="p-grid p-fluid">
-                <div class="p-col-12">
+                <div class="p-col-6">
                   <div class="p-field">
                     <label for="capital">Capital</label>
                     <div class="p-inputgroup">
-                      <span class="p-inputgroup-addon">$</span>
-
-                      <InputNumber v-model="capital" id="capital" placeholder="e.g. 200000" suffix="%" :min="0"
-                                   :max="100" />
+                      <InputNumber v-model="capital" id="capital" placeholder="e.g. 200000" :min="0" mode="currency"
+                                   currency="USD" locale="en-US" />
                     </div>
                   </div>
                 </div>
-                <div class="p-col-12">
+                <div class="p-col-6">
                   <div class="p-field">
                     <label for="annual-expense">Annual Expense</label>
                     <div class="p-inputgroup">
-                      <span class="p-inputgroup-addon">$</span>
-
-                      <InputNumber v-model="annualExpense" id="annual-expense" placeholder="e.g. 100000" suffix="%"
-                                   :min="0" />
+                      <InputNumber v-model="annualExpense" id="annual-expense" placeholder="e.g. 100000" :min="0"
+                                   mode="currency" currency="USD" locale="en-US" />
                     </div>
                   </div>
                 </div>
@@ -35,10 +31,8 @@
                   <div class="p-field">
                     <label for="dividend-yield">Dividend Yield</label>
                     <div class="p-inputgroup">
-
-                      <InputNumber v-model="dividendYield" id="dividend-yield" placeholder="e.g. 4" suffix="%" :min="0"
-                                   :max="100" />
-                      <span class="p-inputgroup-addon">%</span>
+                      <InputNumber v-model="dividendYield" id="dividend-yield" placeholder="e.g. 4.00%" suffix="%"
+                                   :min="0" :max="100" mode="decimal" :minFractionDigits="2" :maxFractionDigits="2" />
                     </div>
                   </div>
                 </div>
@@ -46,10 +40,9 @@
                   <div class="p-field">
                     <label for="dividend-growth-rate">Dividend Growth Rate</label>
                     <div class="p-inputgroup">
-
-                      <InputNumber v-model="dividendGrowthRate" id="dividend-growth-rate" placeholder="e.g. 20"
-                                   suffix="%" :min="0" :max="100" />
-                      <span class="p-inputgroup-addon">%</span>
+                      <InputNumber v-model="dividendGrowthRate" id="dividend-growth-rate" placeholder="e.g. 20.00%"
+                                   suffix="%" :min="0" :max="100" mode="decimal" :minFractionDigits="2"
+                                   :maxFractionDigits="2" />
                     </div>
                   </div>
                 </div>
@@ -57,10 +50,8 @@
                   <div class="p-field">
                     <label for="dividend-tax-rate">Dividend Tax Rate</label>
                     <div class="p-inputgroup">
-
-                      <InputNumber v-model="dividendTaxRate" id="dividend-tax-rate" placeholder="e.g. 30" suffix="%"
-                                   :min="0" :max="100" />
-                      <span class="p-inputgroup-addon">%</span>
+                      <InputNumber v-model="dividendTaxRate" id="dividend-tax-rate" placeholder="e.g. 30.00%" suffix="%"
+                                   :min="0" :max="100" mode="decimal" :minFractionDigits="2" :maxFractionDigits="2" />
                     </div>
                   </div>
                 </div>
@@ -69,10 +60,8 @@
                   <div class="p-field">
                     <label for="inflation-rate">Inflation Rate</label>
                     <div class="p-inputgroup">
-
-                      <InputNumber v-model="inflationRate" id="inflation-rate" placeholder="e.g. 3" suffix="%" :min="0"
-                                   :max="100" />
-                      <span class="p-inputgroup-addon">%</span>
+                      <InputNumber v-model="inflationRate" id="inflation-rate" placeholder="e.g. 3.00%" suffix="%"
+                                   :min="0" :max="100" mode="decimal" :minFractionDigits="2" :maxFractionDigits="2" />
                     </div>
                   </div>
                 </div>
@@ -84,8 +73,9 @@
             </form>
           </div>
 
-          <div class="p-col-12 p-md-7">
-            <DataTable ref="table" exportFilename="Summary of Return" :value="cars" responsiveLayout="scroll">
+          <div class="p-col-12 p-lg-7">
+            <DataTable ref="table" exportFilename="Summary of Return" :value="dividendsSummary"
+                       responsiveLayout="scroll">
               <template #header>
                 <div class="p-text-right">
                   <Button icon="pi pi-external-link" label="Export" @click="exportCSV($event)" />
@@ -128,9 +118,13 @@ export default {
   name: 'Home',
   data() {
     return {
-      message: null,
-      text: null,
-      cars: [
+      capital: 200000,
+      annualExpense: 100000,
+      dividendYield: 4,
+      dividendGrowthRate: 20,
+      dividendTaxRate: 30,
+      inflationRate: 3,
+      dividendsSummary: [
         {
           year: 1,
           annualDividends: 240000,
@@ -156,8 +150,19 @@ export default {
     };
   },
   methods: {
-    greet() {
-      this.message = 'Hello ' + this.text;
+    calculate() {
+      const years = 10;
+      this.dividendsSummary = [];
+
+      for (let i = 0; i < years; i++) {
+        this.dividendsSummary.push({
+          year: i + 1,
+          annualDividends: 244824,
+          yield: '8.16%',
+          monthlyExpense: 26523,
+          monthlyDividends: 40402,
+        });
+      }
     },
     formatCurrency(value) {
       return value.toLocaleString('en-US', {

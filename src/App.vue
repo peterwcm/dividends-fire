@@ -1,10 +1,34 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div class="page">
+    <header class="header">
+      <Menu />
+    </header>
+
+    <main class="main">
+      <router-view />
+    </main>
+
+    <footer class="footer">
+      <div>
+        <p>
+          <strong>FIRE Calculator App</strong> by
+          <a href="https://github.com/peterwcm" target="_blank">Peter Wong</a>
+          © {{ new Date().getFullYear() }}
+        </p>
+      </div>
+    </footer>
   </div>
-  <router-view />
 </template>
+
+<script>
+import Menu from '@/components/Menu.vue';
+
+export default {
+  components: {
+    Menu,
+  },
+};
+</script>
 
 <style lang="scss">
 #app {
