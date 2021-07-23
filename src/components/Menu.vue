@@ -27,14 +27,14 @@ export default {
 
 .navbar-brand {
   a {
-    color: #ccc;
+    color: #bbb;
     text-decoration: none;
   }
 }
 
 .navbar-item {
   &__initial {
-    color: #aaa;
+    color: #888;
   }
 }
 </style>

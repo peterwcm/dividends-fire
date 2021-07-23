@@ -9,7 +9,7 @@
         <h5>FIRE Calculator</h5>
 
         <div class="p-grid">
-          <div class="p-col-12 p-lg-5">
+          <div class="p-col-12">
             <form @submit.prevent="calculate">
 
               <div class="p-grid p-fluid">
@@ -31,7 +31,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="p-col-6">
+                <div class="p-col-6 p-md-3">
                   <div class="p-field">
                     <label for="dividend-yield">Dividend Yield</label>
                     <div class="p-inputgroup">
@@ -41,7 +41,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="p-col-6">
+                <div class="p-col-6 p-md-3">
                   <div class="p-field">
                     <label for="dividend-growth-rate">Dividend Growth Rate</label>
                     <div class="p-inputgroup">
@@ -51,7 +51,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="p-col-6">
+                <div class="p-col-6 p-md-3">
                   <div class="p-field">
                     <label for="dividend-tax-rate">Dividend Tax Rate</label>
                     <div class="p-inputgroup">
@@ -62,7 +62,7 @@
                   </div>
                 </div>
 
-                <div class="p-col-6">
+                <div class="p-col-6 p-md-3">
                   <div class="p-field">
                     <label for="inflation-rate">Inflation Rate</label>
                     <div class="p-inputgroup">
@@ -80,7 +80,7 @@
             </form>
           </div>
 
-          <div class="p-col-12 p-lg-7" v-if="dividendsSummary">
+          <div class="p-col-12" v-if="dividendsSummary">
             <DataTable ref="table" exportFilename="Summary of Return" :value="dividendsSummary">
               <template #header>
                 <div class="p-text-right">
@@ -182,4 +182,8 @@ export default {
 </script>
 
 <style lang="scss">
+.home {
+  max-width: 90rem;
+  margin: 0 auto;
+}
 </style>
