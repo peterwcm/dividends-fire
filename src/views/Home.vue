@@ -1,5 +1,9 @@
 <template>
   <div class="home">
+    <h2>When can I retire?</h2>
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+      standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+      type specimen book.</p>
     <Card>
       <template #content>
         <h5>FIRE Calculator</h5>
@@ -176,3 +180,6 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+</style>

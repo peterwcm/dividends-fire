@@ -17,6 +17,14 @@ export default {
 </script>
 
 <style lang="scss">
+.navbar {
+  padding: 1rem;
+
+  h1 {
+    margin: 0;
+  }
+}
+
 .navbar-brand {
   a {
     color: #ccc;
