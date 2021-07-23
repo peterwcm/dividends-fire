@@ -1,13 +1,8 @@
-# Dividends FIRE [![Vue Version](https://img.shields.io/badge/Vue-3-brightgreen.svg?style=flat-square)](https://vuejs.org/) [![Website dividendsfire.com](https://img.shields.io/website-up-down-green-red/https/dividendsfire.com.svg?style=flat-square)](https://dividendsfire.com/)
+# Dividends FIRE
+
+[![Vue Version](https://img.shields.io/badge/Vue-3-brightgreen.svg?style=flat-square)](https://vuejs.org/) [![Website dividendsfire.com](https://img.shields.io/website-up-down-green-red/https/dividendsfire.com.svg?style=flat-square)](https://dividendsfire.com/)
 
 A FIRE (financial independence, retire early) calculator using dividend growth investing strategy
-
-## Features
-
-- Vue 3
-- Sass/SCSS (with dart-sass)
-- Unit Testing with Jest
-- E2E Testing with Cypress
 
 ## Project setup
 
