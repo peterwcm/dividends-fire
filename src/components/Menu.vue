@@ -2,7 +2,8 @@
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
-        <h1 class="title">FIRE Calculator</h1>
+        <h1 class="title"><span class="navbar-item__initial">D</span>ividends <span
+                class="navbar-item__initial">F</span>IRE</h1>
       </a>
     </div>
   </nav>
@@ -16,4 +17,16 @@ export default {
 </script>
 
 <style lang="scss">
+.navbar-brand {
+  a {
+    color: #ccc;
+    text-decoration: none;
+  }
+}
+
+.navbar-item {
+  &__initial {
+    color: #aaa;
+  }
+}
 </style>
