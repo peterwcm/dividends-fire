@@ -14,7 +14,7 @@
                     <label for="capital">Capital</label>
                     <div class="p-inputgroup">
                       <InputNumber v-model="capital" id="capital" placeholder="e.g. 200000" :min="0" mode="currency"
-                                   currency="USD" locale="en-US" />
+                                   currency="USD" locale="en-US" required />
                     </div>
                   </div>
                 </div>
@@ -23,7 +23,7 @@
                     <label for="annual-expense">Annual Expense</label>
                     <div class="p-inputgroup">
                       <InputNumber v-model="annualExpense" id="annual-expense" placeholder="e.g. 100000" :min="0"
-                                   mode="currency" currency="USD" locale="en-US" />
+                                   mode="currency" currency="USD" locale="en-US" required />
                     </div>
                   </div>
                 </div>
@@ -32,7 +32,8 @@
                     <label for="dividend-yield">Dividend Yield</label>
                     <div class="p-inputgroup">
                       <InputNumber v-model="dividendYield" id="dividend-yield" placeholder="e.g. 4.00%" suffix="%"
-                                   :min="0" :max="100" mode="decimal" :minFractionDigits="2" :maxFractionDigits="2" />
+                                   :min="0" :max="100" mode="decimal" :minFractionDigits="2" :maxFractionDigits="2"
+                                   required />
                     </div>
                   </div>
                 </div>
@@ -42,7 +43,7 @@
                     <div class="p-inputgroup">
                       <InputNumber v-model="dividendGrowthRate" id="dividend-growth-rate" placeholder="e.g. 20.00%"
                                    suffix="%" :min="0" :max="100" mode="decimal" :minFractionDigits="2"
-                                   :maxFractionDigits="2" />
+                                   :maxFractionDigits="2" required />
                     </div>
                   </div>
                 </div>
@@ -51,7 +52,8 @@
                     <label for="dividend-tax-rate">Dividend Tax Rate</label>
                     <div class="p-inputgroup">
                       <InputNumber v-model="dividendTaxRate" id="dividend-tax-rate" placeholder="e.g. 30.00%" suffix="%"
-                                   :min="0" :max="100" mode="decimal" :minFractionDigits="2" :maxFractionDigits="2" />
+                                   :min="0" :max="100" mode="decimal" :minFractionDigits="2" :maxFractionDigits="2"
+                                   required />
                     </div>
                   </div>
                 </div>
@@ -61,7 +63,8 @@
                     <label for="inflation-rate">Inflation Rate</label>
                     <div class="p-inputgroup">
                       <InputNumber v-model="inflationRate" id="inflation-rate" placeholder="e.g. 3.00%" suffix="%"
-                                   :min="0" :max="100" mode="decimal" :minFractionDigits="2" :maxFractionDigits="2" />
+                                   :min="0" :max="100" mode="decimal" :minFractionDigits="2" :maxFractionDigits="2"
+                                   required />
                     </div>
                   </div>
                 </div>
@@ -73,7 +76,7 @@
             </form>
           </div>
 
-          <div class="p-col-12 p-lg-7">
+          <div class="p-col-12 p-lg-7" v-if="dividendsSummary">
             <DataTable ref="table" exportFilename="Summary of Return" :value="dividendsSummary">
               <template #header>
                 <div class="p-text-right">
@@ -123,38 +126,16 @@ export default {
     return {
       capital: 3000000,
       annualExpense: 300000,
-      dividendYield: 8,
-      dividendGrowthRate: 1,
-      dividendTaxRate: 0,
+      dividendYield: 4,
+      dividendGrowthRate: 20,
+      dividendTaxRate: 30,
       inflationRate: 3,
-      dividendsSummary: [
-        {
-          year: 1,
-          annualDividends: 240000,
-          dividendYield: 0.08,
-          monthlyExpense: 25000,
-          monthlyDividends: 20000,
-        },
-        {
-          year: 2,
-          annualDividends: 242400,
-          dividendYield: 0.0808,
-          monthlyExpense: 25750,
-          monthlyDividends: 20200,
-        },
-        {
-          year: 3,
-          annualDividends: 244824,
-          dividendYield: 0.0816,
-          monthlyExpense: 26523,
-          monthlyDividends: 40402,
-        },
-      ],
+      dividendsSummary: null,
     };
   },
   methods: {
     calculate() {
-      const years = 10;
+      const years = 15;
       this.dividendsSummary = [];
 
       for (let i = 0; i < years; i++) {
