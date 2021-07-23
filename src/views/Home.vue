@@ -1,9 +1,8 @@
 <template>
   <div class="home">
-    <h2>When can I retire?</h2>
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-      standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-      type specimen book.</p>
+    <h2>When can I retire with dividend growth investing ?</h2>
+    <p>By combining the benefits of compounding dividends and the growth of dividends, you can become financially
+      independent in 10-year time, or less. This calculator helps you pick the right dividend growth stock.</p>
     <Card>
       <template #content>
         <h5>FIRE Calculator</h5>
