@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import { createGtm } from 'vue-gtm';
 
 import PrimeVue from 'primevue/config';
 import Badge from 'primevue/badge';
@@ -20,6 +21,13 @@ const app = createApp(App);
 
 app.use(router);
 app.use(PrimeVue, {ripple: true});
+app.use(
+    createGtm({
+        id: 'GTM-M94QLZW',
+        vueRouter: router,
+        trackOnNextTick: false,
+    })
+);
 
 app.component('Badge', Badge);
 app.component('Button', Button);
