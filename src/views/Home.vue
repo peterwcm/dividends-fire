@@ -87,7 +87,7 @@
                 </div>
               </template>
               <Column field="year" header="Year"></Column>
-              <Column field="annualDividends" header="Annual Dividends">
+              <Column field="annualDividends" header="Annual Dividends (After Tax)">
                 <template #body="slotProps">
                   {{formatCurrency(slotProps.data.annualDividends)}}
                 </template>
@@ -127,8 +127,8 @@ export default {
   name: 'Home',
   data() {
     return {
-      capital: 3000000,
-      annualExpense: 300000,
+      capital: 200000,
+      annualExpense: 20000,
       dividendYield: 4,
       dividendGrowthRate: 20,
       dividendTaxRate: 30,
@@ -146,7 +146,8 @@ export default {
           (this.dividendYield *
             Math.pow(1 + this.dividendGrowthRate / 100, i)) /
           100;
-        const annualDividends = this.capital * dividendYield;
+        const annualDividends =
+          this.capital * dividendYield * (1 - this.dividendTaxRate / 100);
 
         this.dividendsSummary.push({
           year: i + 1,
@@ -155,8 +156,7 @@ export default {
           monthlyExpense:
             (this.annualExpense / 12) *
             Math.pow(1 + this.inflationRate / 100, i),
-          monthlyDividends:
-            (annualDividends / 12) * (1 - this.dividendTaxRate / 100),
+          monthlyDividends: annualDividends / 12,
         });
       }
     },
