@@ -9,7 +9,7 @@
 
         <div class="p-grid">
           <div class="p-col-12">
-            <form @submit.prevent="calculate">
+            <form class="fire-calculator" @submit.prevent="calculate">
 
               <div class="p-grid p-fluid">
                 <div class="p-col-6">
@@ -80,7 +80,7 @@
                 </div>
 
                 <div class="p-col">
-                  <Button type="submit" label="Calculate" />
+                  <Button class="fire-calculator__submit" type="submit" label="Calculate" />
                 </div>
               </div>
             </form>
@@ -90,7 +90,8 @@
             <DataTable ref="table" exportFilename="Summary of Return" :value="dividendsSummary">
               <template #header>
                 <div class="p-text-right">
-                  <Button icon="pi pi-external-link" label="Export" @click="exportCSV($event)" />
+                  <Button class="fire-calculator__export" icon="pi pi-external-link" label="Export"
+                          @click="exportCSV($event)" />
                 </div>
               </template>
               <Column field="year" header="Year"></Column>
