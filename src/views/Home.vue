@@ -72,6 +72,13 @@
                   </div>
                 </div>
 
+                <div class="p-col-12">
+                  <div class="p-field-checkbox">
+                    <Checkbox v-model="isReinvesting" id="is-reinvesting" :binary="true" />
+                    <label for="is-reinvesting">Reinvesting dividends annually?</label>
+                  </div>
+                </div>
+
                 <div class="p-col">
                   <Button type="submit" label="Calculate" />
                 </div>
@@ -127,27 +134,29 @@ export default {
   name: 'Home',
   data() {
     return {
+      numYears: 15,
       capital: 200000,
       annualExpense: 20000,
       dividendYield: 4,
       dividendGrowthRate: 20,
       dividendTaxRate: 30,
       inflationRate: 3,
+      isReinvesting: false,
       dividendsSummary: null,
     };
   },
   methods: {
     calculate() {
-      const years = 15;
+      let capital = this.capital;
       this.dividendsSummary = [];
 
-      for (let i = 0; i < years; i++) {
+      for (let i = 0; i < this.numYears; i++) {
         const dividendYield =
           (this.dividendYield *
             Math.pow(1 + this.dividendGrowthRate / 100, i)) /
           100;
         const annualDividends =
-          this.capital * dividendYield * (1 - this.dividendTaxRate / 100);
+          capital * dividendYield * (1 - this.dividendTaxRate / 100);
 
         this.dividendsSummary.push({
           year: i + 1,
@@ -158,6 +167,10 @@ export default {
             Math.pow(1 + this.inflationRate / 100, i),
           monthlyDividends: annualDividends / 12,
         });
+
+        if (this.isReinvesting) {
+          capital += annualDividends;
+        }
       }
     },
 
