@@ -72,6 +72,13 @@
                   </div>
                 </div>
 
+                <div class="p-col-12">
+                  <div class="p-field-checkbox">
+                    <Checkbox v-model="isReinvesting" id="is-reinvesting" :binary="true" />
+                    <label for="is-reinvesting">Reinvesting dividends annually?</label>
+                  </div>
+                </div>
+
                 <div class="p-col">
                   <Button type="submit" label="Calculate" />
                 </div>
@@ -87,7 +94,7 @@
                 </div>
               </template>
               <Column field="year" header="Year"></Column>
-              <Column field="annualDividends" header="Annual Dividends">
+              <Column field="annualDividends" header="Annual Dividends (After Tax)">
                 <template #body="slotProps">
                   {{formatCurrency(slotProps.data.annualDividends)}}
                 </template>
@@ -127,26 +134,29 @@ export default {
   name: 'Home',
   data() {
     return {
-      capital: 3000000,
-      annualExpense: 300000,
+      numYears: 15,
+      capital: 200000,
+      annualExpense: 20000,
       dividendYield: 4,
       dividendGrowthRate: 20,
       dividendTaxRate: 30,
       inflationRate: 3,
+      isReinvesting: false,
       dividendsSummary: null,
     };
   },
   methods: {
     calculate() {
-      const years = 15;
+      let capital = this.capital;
       this.dividendsSummary = [];
 
-      for (let i = 0; i < years; i++) {
+      for (let i = 0; i < this.numYears; i++) {
         const dividendYield =
           (this.dividendYield *
             Math.pow(1 + this.dividendGrowthRate / 100, i)) /
           100;
-        const annualDividends = this.capital * dividendYield;
+        const annualDividends =
+          capital * dividendYield * (1 - this.dividendTaxRate / 100);
 
         this.dividendsSummary.push({
           year: i + 1,
@@ -155,9 +165,12 @@ export default {
           monthlyExpense:
             (this.annualExpense / 12) *
             Math.pow(1 + this.inflationRate / 100, i),
-          monthlyDividends:
-            (annualDividends / 12) * (1 - this.dividendTaxRate / 100),
+          monthlyDividends: annualDividends / 12,
         });
+
+        if (this.isReinvesting) {
+          capital += annualDividends;
+        }
       }
     },
 

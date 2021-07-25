@@ -7,6 +7,7 @@ import PrimeVue from 'primevue/config';
 import Badge from 'primevue/badge';
 import Button from 'primevue/button';
 import Card from 'primevue/card';
+import Checkbox from 'primevue/checkbox';
 import Column from 'primevue/column';
 import DataTable from 'primevue/datatable';
 import InputNumber from 'primevue/inputnumber';
@@ -32,6 +33,7 @@ app.use(
 app.component('Badge', Badge);
 app.component('Button', Button);
 app.component('Card', Card);
+app.component('Checkbox', Checkbox);
 app.component('Column', Column);
 app.component('DataTable', DataTable);
 app.component('InputNumber', InputNumber);
