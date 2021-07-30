@@ -126,13 +126,13 @@ export default {
   data() {
     return {
       numYears: 15,
-      capital: 200000,
+      capital: 120000,
       annualExpense: 20000,
       dividendYield: 4,
       dividendGrowthRate: 20,
       dividendTaxRate: 30,
       inflationRate: 3,
-      isReinvesting: false,
+      isReinvesting: true,
       dividendsSummary: null,
     };
   },
