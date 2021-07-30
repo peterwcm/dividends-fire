@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer">
+  <footer>
     <div class="copyright">
       Design &amp; Created by
       <a href="https://github.com/peterwcm" target="_blank">Peter Wong</a>
@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style lang="scss">
-.footer {
+footer {
   padding: 1rem;
   font-size: 80%;
   color: #fff;
