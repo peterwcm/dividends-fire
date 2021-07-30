@@ -13,7 +13,7 @@ import DataTable from 'primevue/datatable';
 import InputNumber from 'primevue/inputnumber';
 import InputText from 'primevue/inputtext';
 
-import 'primevue/resources/themes/saga-green/theme.css'
+// Primevue css.
 import 'primevue/resources/primevue.min.css'
 import 'primeicons/primeicons.css'
 import 'primeflex/primeflex.css';

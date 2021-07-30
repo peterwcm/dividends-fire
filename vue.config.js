@@ -1,5 +1,6 @@
 const esmRequire = require('esm')(module);
 const { routes } = esmRequire('./src/routes.js');
+const path = require('path');
 
 module.exports = {
 	pluginOptions: {
@@ -8,6 +9,10 @@ module.exports = {
 			routes,
             outputDir: './public',
             pretty: true,
-		}
+		},
+		'style-resources-loader': {
+			preProcessor: 'scss',
+			patterns: [path.resolve(__dirname, './src/styles/abstracts/_index.scss')],
+		},
 	}
 }
