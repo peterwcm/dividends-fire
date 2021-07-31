@@ -10,3 +10,14 @@ $color--deep-orange-100: #ffccbc;
 
 $color--blue-400: #42a5f5;
 $color--blue-100: #bbdefb;
+
+$color--white: #ffffff;
+
+// Theme colors.
+$color--primary: $color--cyan-400;
+$text--primary: $color--white;
+
+// Forms.
+$input-background-color: $color--white;
+$input-border-color--hover: $color--cyan-400;
+$input-border-color--focus: $color--cyan-100;
