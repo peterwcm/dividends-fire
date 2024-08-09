@@ -29,7 +29,7 @@ export default {
 
 <style lang="scss">
 .home {
-  max-width: 90rem;
+  max-width: 75rem;
   margin: 0 auto;
 }
 </style>

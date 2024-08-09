@@ -2,7 +2,7 @@
   <footer>
     <div class="copyright">
       Design &amp; Created by
-      <a href="https://github.com/peterwcm" target="_blank">Peter Wong</a>
+      <a href="https://peterwong.me" target="_blank">Peter Wong</a>
       © {{ new Date().getFullYear() }}
     </div>
   </footer>
