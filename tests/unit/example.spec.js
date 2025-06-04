@@ -1,12 +1,9 @@
 import { shallowMount } from '@vue/test-utils'
-import HelloWorld from '@/components/HelloWorld.vue'
+import Menu from '@/components/Menu.vue'
 
-describe('HelloWorld.vue', () => {
-  it('renders props.msg when passed', () => {
-    const msg = 'new message'
-    const wrapper = shallowMount(HelloWorld, {
-      props: { msg }
-    })
-    expect(wrapper.text()).toMatch(msg)
+describe('Menu.vue', () => {
+  it('renders the site title', () => {
+    const wrapper = shallowMount(Menu)
+    expect(wrapper.text()).toContain('Dividends FIRE')
   })
 })
