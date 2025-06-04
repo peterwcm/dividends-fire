@@ -1,7 +1,7 @@
 <template>
   <footer>
     <div class="copyright">
-      Design &amp; Created by
+      Designed &amp; Created by
       <a href="https://peterwong.me" target="_blank">Peter Wong</a>
       © {{ new Date().getFullYear() }}
     </div>
