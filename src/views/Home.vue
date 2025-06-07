@@ -2,7 +2,7 @@
   <div class="home">
     <h2>When can I retire with dividend growth investing?</h2>
     <p>By combining the benefits of compounding dividends and the growth of dividends, you can become financially
-      independent in 10-year time, or less. This calculator helps you pick the right dividend growth stock.</p>
+      independent in 10 years or less. This calculator helps you pick the right dividend growth stock.</p>
     <p>For dividend stock screeners, you can use websites like
       <a href="https://seekingalpha.com" target="_blank">Seeking Alpha <i class="pi pi-external-link"></i></a> or
       <a href="https://www.gurufocus.com" target="_blank">GuruFocus.com <i class="pi pi-external-link"></i></a>
