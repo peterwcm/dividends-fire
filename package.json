@@ -1,45 +1,30 @@
 {
   "name": "dividends-fire",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit",
-    "test:e2e": "vue-cli-service test:e2e",
-    "lint": "vue-cli-service lint",
-    "sitemap": "vue-cli-service sitemap"
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "core-js": "^3.6.5",
-    "esm": "^3.2.25",
+    "@next/third-parties": "^15.4.1",
+    "next": "^15.4.1",
     "primeflex": "^2.0.0",
-    "primeicons": "^4.1.0",
-    "primevue": "^3.5.1",
-    "vue": "^3.0.0",
-    "vue-gtm": "^3.5.0",
-    "vue-router": "^4.0.0-0"
+    "primeicons": "^5.0.0",
+    "primereact": "^10.6.6",
+    "react": "^19",
+    "react-dom": "^19"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^5.0.0",
-    "@vue/cli-plugin-e2e-cypress": "^5.0.0",
-    "@vue/cli-plugin-eslint": "^5.0.0",
-    "@vue/cli-plugin-router": "^5.0.0",
-    "@vue/cli-plugin-unit-jest": "^5.0.0",
-    "@vue/cli-service": "^5.0.0",
-    "@vue/compiler-sfc": "^3.0.0",
-    "@vue/test-utils": "^2.4.6",
-    "@vue/vue3-jest": "^29.2.6",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-eslint": "^10.1.0",
-    "babel-jest": "^29.7.0",
-    "eslint": "^7.0.0",
-    "eslint-plugin-vue": "^7.0.0",
-    "jest": "^29.7.0",
-    "sass": "^1.26.5",
-    "sass-loader": "^8.0.2",
-    "typescript": "^3.9.3",
-    "vue-cli-plugin-sitemap": "^2.3.0",
-    "vue-jest": "^5.0.0-0"
+    "@types/node": "24.0.14",
+    "@types/react": "19.1.8",
+    "@typescript-eslint/eslint-plugin": "^8.37.0",
+    "@typescript-eslint/parser": "^8.37.0",
+    "eslint": "^9.31.0",
+    "eslint-config-next": "^15.4.1",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.37.0"
   }
 }

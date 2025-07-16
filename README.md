@@ -1,14 +1,14 @@
 # Dividends FIRE
 
-[![Vue Version](https://img.shields.io/badge/Vue-3-brightgreen.svg?style=flat-square)](https://vuejs.org/) [![Website dividendsfire.com](https://img.shields.io/website-up-down-green-red/https/dividendsfire.com.svg?style=flat-square)](https://dividendsfire.com/)
+[![Next.js Version](https://img.shields.io/badge/Next.js-15-blue.svg?style=flat-square)](https://nextjs.org/) [![Website dividendsfire.com](https://img.shields.io/website-up-down-green-red/https/dividendsfire.com.svg?style=flat-square)](https://dividendsfire.com/)
 
 A web based calculator that estimates how long it might take to retire using a dividend growth investing strategy.
 
 ## Features
 
-- Built with [Vue 3](https://vuejs.org/) and [PrimeVue](https://primevue.org/) components
+- Built with [Next.js 15](https://nextjs.org/) and [PrimeReact](https://primereact.org/) components
+- Utilizes Static Site Generation (SSG) for fast loading and improved SEO
 - Simple form to calculate years to financial independence
-- Unit and end-to-end tests via Jest and Cypress
 
 ## Requirements
 
@@ -20,7 +20,7 @@ Install dependencies and launch the development server:
 
 ```bash
 yarn install
-yarn serve
+yarn dev
 ```
 
 To create a production build run:
@@ -33,11 +33,10 @@ yarn build
 
 | Command        | Description                              |
 | -------------- | ---------------------------------------- |
-| `yarn serve`   | Compiles and hot-reloads for development |
-| `yarn build`   | Compiles and minifies for production     |
-| `yarn test:unit` | Run unit tests                          |
-| `yarn test:e2e`  | Run end-to-end tests using Cypress      |
-| `yarn lint`    | Lints and fixes files                    |
+| `yarn dev`   | Starts the development server            |
+| `yarn build` | Creates a production build               |
+| `yarn start` | Starts the production server             |
+| `yarn lint`  | Lints and fixes files                    |
 
 ## Disclaimer
 
