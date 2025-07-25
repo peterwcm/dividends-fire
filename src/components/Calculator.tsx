@@ -198,7 +198,7 @@ const Calculator = () => {
             />
           </Grid>
           <Grid size={12}>
-            <Button type="submit" variant="contained" color="primary" size="large" fullWidth>
+            <Button type="submit" className="fire-calculator__submit" variant="contained" color="primary" size="large" fullWidth>
               Calculate
             </Button>
           </Grid>
@@ -210,7 +210,7 @@ const Calculator = () => {
           <Grid size={12}>
             <Paper elevation={3}>
               <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2 }}>
-                <Button onClick={exportCSV} variant="contained">
+                <Button className="fire-calculator__export" onClick={exportCSV} variant="contained">
                   Export
                 </Button>
               </Box>
