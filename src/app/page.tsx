@@ -6,21 +6,21 @@ import Calculator from '../components/Calculator';
 const Home = () => {
   return (
     <Container>
-      <Typography variant="h1" component="h1">
+      <Typography variant="h2" component="h1">
         When Can You Retire With Dividend Growth Investing?
       </Typography>
-      <Typography component="p" variant="body1">
+      <Typography component="p">
         Achieve Financial Independence and Retire Early (FIRE) with our powerful dividend calculator. By harnessing the dual forces of dividend compounding and dividend growth, you can build a sustainable passive income stream. This calculator is designed to help you forecast your journey to financial freedom and select the most promising dividend growth stocks for your portfolio.
       </Typography>
 
-      <Typography variant="h4" component="h2" gutterBottom>
+      <Typography component="h2">
         What is Dividend Growth Investing?
       </Typography>
       <Typography component="p">
         Dividend growth investing is a strategy that focuses on buying stocks of companies that not only pay dividends but also consistently increase them over time. This approach allows your income to grow, protecting your purchasing power against inflation and accelerating your path to retirement.
       </Typography>
 
-      <Typography variant="h4" component="h2" gutterBottom>
+      <Typography component="h2">
         How to Use the Calculator
       </Typography>
       <Typography component="p">
