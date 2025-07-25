@@ -1,12 +1,13 @@
-import 'primereact/resources/themes/saga-blue/theme.css';
-import 'primereact/resources/primereact.min.css';
-import 'primeicons/primeicons.css';
-import 'primeflex/primeflex.css';
-import '../styles/globals.css';
-import { Montserrat } from "next/font/google";
+
+import { Box, CssBaseline } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { GoogleTagManager } from '@next/third-parties/google'
-import Header from '../components/Header';
+import { Montserrat } from "next/font/google";
+
 import Footer from '../components/Footer';
+import Header from '../components/Header';
+import theme from '../theme';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -17,7 +18,7 @@ export default function RootLayout({ children }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={montserrat.className}>
+    <html lang="en" className={montserrat.variable}>
       <head>
         <title>Dividends FIRE Calculator - Achieve Financial Independence</title>
         <meta name="description" content="Calculate when you can retire with dividend growth investing. Our FIRE calculator helps you pick the right dividend growth stocks to achieve financial independence in 10 years or less." />
@@ -25,15 +26,18 @@ export default function RootLayout({ children }: {
         <GoogleTagManager gtmId="GTM-M94QLZW" />
       </head>
       <body>
-        <div className="page">
-          <Header />
+        <AppRouterCacheProvider>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Header />
 
-          <main className="main">
-            {children}
-          </main>
+            <Box component={'main'}>
+              {children}
+            </Box>
 
-          <Footer />
-        </div>
+            <Footer />
+          </ThemeProvider>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );

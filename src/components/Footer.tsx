@@ -1,11 +1,18 @@
+import { Container, Typography, Link as MuiLink } from '@mui/material';
+
 const Footer = () => {
   return (
     <footer>
-      <div className="copyright">
-        <span>Designed & Created by </span>
-        <a href="https://peterwong.me" target="_blank" rel="noreferrer">Peter Wong</a>
-        <span> © {new Date().getFullYear()}</span>
-      </div>
+      <Container maxWidth="lg">
+        <Typography variant="body2" color="text.secondary" align="center">
+          {'Designed & Created by '}
+          <MuiLink color="inherit" href="https://peterwong.me" target="_blank" rel="noreferrer">
+            Peter Wong
+          </MuiLink>
+          {' © '}
+          {new Date().getFullYear()}
+        </Typography>
+      </Container>
     </footer>
   );
 };

@@ -1,11 +1,23 @@
 'use client';
 
-import { InputNumber } from 'primereact/inputnumber';
-import { Button } from 'primereact/button';
-import { Checkbox } from 'primereact/checkbox';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-import { Badge } from 'primereact/badge';
+import {
+  Grid,
+  TextField,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Typography,
+  Chip,
+  Box,
+  InputAdornment,
+} from '@mui/material';
 import { useState, useRef } from 'react';
 
 const Calculator = () => {
@@ -61,135 +73,183 @@ const Calculator = () => {
   };
 
   const exportCSV = () => {
-    dt.current.exportCSV();
-  };
+    const headers = [
+      'Year',
+      'Annual Dividends (After Tax)',
+      'Dividend Yield',
+      'Monthly Expense',
+      'Monthly Dividends (After Tax)',
+      'FIRE',
+    ];
+    const rows = dividendsSummary.map((row) => [
+      row.year,
+      formatCurrency(row.annualDividends),
+      formatPercent(row.dividendYield),
+      formatCurrency(row.monthlyExpense),
+      formatCurrency(row.monthlyDividends),
+      row.monthlyDividends < row.monthlyExpense ? 'No' : 'Yes',
+    ]);
 
-  const fireTemplate = (rowData) => {
-    return (
-      <Badge
-        value={rowData.monthlyDividends < rowData.monthlyExpense ? 'No' : 'Yes'}
-        severity={rowData.monthlyDividends < rowData.monthlyExpense ? 'danger' : 'success'}
-      />
-    );
-  };
+    let csvContent = 'data:text/csv;charset=utf-8,';
+    csvContent += headers.join(',') + '\r\n';
+    rows.forEach((row) => {
+      csvContent += row.join(',') + '\r\n';
+    });
 
-  const annualDividendsTemplate = (rowData) => {
-    return formatCurrency(rowData.annualDividends);
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', 'Summary of Return.csv');
+    document.body.appendChild(link);
+    link.click();
   };
-
-  const dividendYieldTemplate = (rowData) => {
-    return formatPercent(rowData.dividendYield);
-  };
-
-  const monthlyExpenseTemplate = (rowData) => {
-    return formatCurrency(rowData.monthlyExpense);
-  };
-
-  const monthlyDividendsTemplate = (rowData) => {
-    return formatCurrency(rowData.monthlyDividends);
-  };
-
-  const header = (
-    <div className="p-text-right">
-      <Button className="fire-calculator__export" icon="pi pi-external-link" label="Export"
-        onClick={exportCSV} />
-    </div>
-  );
 
   return (
-    <div>
-      <h5>FIRE Calculator</h5>
+    <Box>
+      <Typography variant="h4">
+        FIRE Calculator
+      </Typography>
+      <Box component="form" onSubmit={calculate} sx={{ mb: 4 }}>
+        <Grid container spacing={2}>
+          <Grid size={6}>
+            <TextField
+              label="Capital"
+              type="number"
+              value={capital}
+              onChange={(e) => setCapital(parseFloat(e.target.value))}
+              fullWidth
+              required
+            />
+          </Grid>
+          <Grid size={6}>
+            <TextField
+              label="Annual Expense"
+              type="number"
+              value={annualExpense}
+              onChange={(e) => setAnnualExpense(parseFloat(e.target.value))}
+              fullWidth
+              required
+            />
+          </Grid>
+          <Grid size={{ xs: 6, md: 3 }}>
+            <TextField
+              label="Dividend Yield"
+              type="number"
+              value={dividendYield}
+              onChange={(e) => setDividendYield(parseFloat(e.target.value))}
+              fullWidth
+              required
+              slotProps={{
+                input: {
+                  endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                },
+              }}
+            />
+          </Grid>
+          <Grid size={{ xs: 6, md: 3 }}>
+            <TextField
+              label="Dividend Growth Rate"
+              type="number"
+              value={dividendGrowthRate}
+              onChange={(e) => setDividendGrowthRate(parseFloat(e.target.value))}
+              fullWidth
+              required
+              slotProps={{
+                input: {
+                  endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                },
+              }}
+            />
+          </Grid>
+          <Grid size={{ xs: 6, md: 3 }}>
+            <TextField
+              label="Dividend Tax Rate"
+              type="number"
+              value={dividendTaxRate}
+              onChange={(e) => setDividendTaxRate(parseFloat(e.target.value))}
+              fullWidth
+              required
+              slotProps={{
+                input: {
+                  endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                },
+              }}
+            />
+          </Grid>
+          <Grid size={{ xs: 6, md: 3 }}>
+            <TextField
+              label="Inflation Rate"
+              type="number"
+              value={inflationRate}
+              onChange={(e) => setInflationRate(parseFloat(e.target.value))}
+              fullWidth
+              required
+              slotProps={{
+                input: {
+                  endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                },
+              }}
+            />
+          </Grid>
+          <Grid size={12}>
+            <FormControlLabel
+              control={<Checkbox checked={isReinvesting} onChange={(e) => setIsReinvesting(e.target.checked)} />}
+              label="Reinvesting dividends annually?"
+            />
+          </Grid>
+          <Grid size={12}>
+            <Button type="submit" className="fire-calculator__submit" variant="contained" color="primary" size="large" fullWidth>
+              Calculate
+            </Button>
+          </Grid>
+        </Grid>
+      </Box>
 
-      <div className="p-grid">
-        <div className="p-col-12">
-          <form className="fire-calculator" onSubmit={calculate}>
-            <div className="p-grid p-fluid">
-              <div className="p-col-6">
-                <div className="p-field">
-                  <label htmlFor="capital">Capital</label>
-                  <div className="p-inputgroup">
-                    <InputNumber value={capital} onValueChange={(e) => setCapital(e.value)} id="capital" placeholder="e.g. 200000" min={0} mode="currency"
-                      currency="USD" locale="en-US" required />
-                  </div>
-                </div>
-              </div>
-              <div className="p-col-6">
-                <div className="p-field">
-                  <label htmlFor="annual-expense">Annual Expense</label>
-                  <div className="p-inputgroup">
-                    <InputNumber value={annualExpense} onValueChange={(e) => setAnnualExpense(e.value)} id="annual-expense" placeholder="e.g. 100000" min={0}
-                      mode="currency" currency="USD" locale="en-US" required />
-                  </div>
-                </div>
-              </div>
-              <div className="p-col-6 p-md-3">
-                <div className="p-field">
-                  <label htmlFor="dividend-yield">Dividend Yield</label>
-                  <div className="p-inputgroup">
-                    <InputNumber value={dividendYield} onValueChange={(e) => setDividendYield(e.value)} id="dividend-yield" placeholder="e.g. 4.00%" suffix="%" min={0}
-                      max={100} mode="decimal" minFractionDigits={2} maxFractionDigits={2} required />
-                  </div>
-                </div>
-              </div>
-              <div className="p-col-6 p-md-3">
-                <div className="p-field">
-                  <label htmlFor="dividend-growth-rate">Dividend Growth Rate</label>
-                  <div className="p-inputgroup">
-                    <InputNumber value={dividendGrowthRate} onValueChange={(e) => setDividendGrowthRate(e.value)} id="dividend-growth-rate" placeholder="e.g. 20.00%" suffix="%"
-                      min={0} max={100} mode="decimal" minFractionDigits={2} maxFractionDigits={2}
-                      required />
-                  </div>
-                </div>
-              </div>
-              <div className="p-col-6 p-md-3">
-                <div className="p-field">
-                  <label htmlFor="dividend-tax-rate">Dividend Tax Rate</label>
-                  <div className="p-inputgroup">
-                    <InputNumber value={dividendTaxRate} onValueChange={(e) => setDividendTaxRate(e.value)} id="dividend-tax-rate" placeholder="e.g. 30.00%" suffix="%"
-                      min={0} max={100} mode="decimal" minFractionDigits={2} maxFractionDigits={2}
-                      required />
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-col-6 p-md-3">
-                <div className="p-field">
-                  <label htmlFor="inflation-rate">Inflation Rate</label>
-                  <div className="p-inputgroup">
-                    <InputNumber value={inflationRate} onValueChange={(e) => setInflationRate(e.value)} id="inflation-rate" placeholder="e.g. 3.00%" suffix="%" min={0}
-                      max={100} mode="decimal" minFractionDigits={2} maxFractionDigits={2} required />
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-col-12">
-                <div className="p-field-checkbox">
-                  <Checkbox checked={isReinvesting} onChange={(e) => setIsReinvesting(e.checked)} id="is-reinvesting" />
-                  <label htmlFor="is-reinvesting">Reinvesting dividends annually?</label>
-                </div>
-              </div>
-
-              <div className="p-col">
-                <Button className="fire-calculator__submit" type="submit" label="Calculate" />
-              </div>
-            </div>
-          </form>
-        </div>
-
-        {dividendsSummary && (
-          <div className="p-col-12">
-            <DataTable ref={dt} exportFilename="Summary of Return" value={dividendsSummary} header={header}>
-              <Column field="year" header="Year"></Column>
-              <Column field="annualDividends" header="Annual Dividends (After Tax)" body={annualDividendsTemplate}></Column>
-              <Column field="dividendYield" header="Dividend Yield" body={dividendYieldTemplate}></Column>
-              <Column field="monthlyExpense" header="Monthly Expense" body={monthlyExpenseTemplate}></Column>
-              <Column field="monthlyDividends" header="Monthly Dividends (After Tax)" body={monthlyDividendsTemplate}></Column>
-              <Column header="FIRE" body={fireTemplate}></Column>
-            </DataTable>
-          </div>
-        )}
-      </div>
-    </div>
+      {dividendsSummary && (
+        <Grid container>
+          <Grid size={12}>
+            <Paper elevation={3}>
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2 }}>
+                <Button className="fire-calculator__export" onClick={exportCSV} variant="contained">
+                  Export
+                </Button>
+              </Box>
+              <TableContainer ref={dt}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Year</TableCell>
+                      <TableCell>Annual Dividends (After Tax)</TableCell>
+                      <TableCell>Dividend Yield</TableCell>
+                      <TableCell>Monthly Expense</TableCell>
+                      <TableCell>Monthly Dividends (After Tax)</TableCell>
+                      <TableCell>FIRE</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {dividendsSummary.map((row) => (
+                      <TableRow key={row.year}>
+                        <TableCell>{row.year}</TableCell>
+                        <TableCell>{formatCurrency(row.annualDividends)}</TableCell>
+                        <TableCell>{formatPercent(row.dividendYield)}</TableCell>
+                        <TableCell>{formatCurrency(row.monthlyExpense)}</TableCell>
+                        <TableCell>{formatCurrency(row.monthlyDividends)}</TableCell>
+                        <TableCell>
+                          <Chip
+                            label={row.monthlyDividends < row.monthlyExpense ? 'No' : 'Yes'}
+                            color={row.monthlyDividends < row.monthlyExpense ? 'error' : 'success'}
+                          />
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Paper>
+          </Grid>
+        </Grid>
+      )}
+    </Box >
   );
 };
 
