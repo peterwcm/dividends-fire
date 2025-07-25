@@ -1,12 +1,13 @@
 
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
-import { Montserrat } from "next/font/google";
+import { Box, CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
-import theme from '../theme';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { GoogleTagManager } from '@next/third-parties/google'
-import Header from '../components/Header';
+import { Montserrat } from "next/font/google";
+
 import Footer from '../components/Footer';
-import { Box, Container } from '@mui/material';
+import Header from '../components/Header';
+import theme from '../theme';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -27,13 +28,14 @@ export default function RootLayout({ children }: {
       <body>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-              <Header />
-              <Container maxWidth="lg" component="main" sx={{ flexGrow: 1, py: 4 }}>
-                {children}
-              </Container>
-              <Footer />
+            <CssBaseline />
+            <Header />
+
+            <Box component={'main'}>
+              {children}
             </Box>
+
+            <Footer />
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>

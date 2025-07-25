@@ -1,8 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
 import {
-  Container,
   Grid,
   TextField,
   Button,
@@ -18,7 +16,9 @@ import {
   Typography,
   Chip,
   Box,
+  InputAdornment,
 } from '@mui/material';
+import { useState, useRef } from 'react';
 
 const Calculator = () => {
   const [capital, setCapital] = useState(120000);
@@ -105,99 +105,113 @@ const Calculator = () => {
   };
 
   return (
-    <Container sx={{ py: 6 }}>
-      <Typography variant="h4" component="h1" gutterBottom>
+    <Box>
+      <Typography component="h4">
         FIRE Calculator
       </Typography>
-      <Grid container spacing={4}>
-        <Grid item xs={12}>
-          <Paper sx={{ p: 3 }}>
-            <Box component="form" onSubmit={calculate}>
-              <Grid container spacing={3}>
-                <Grid item xs={12} md={6}>
-                  <TextField
-                    label="Capital"
-                    type="number"
-                    value={capital}
-                    onChange={(e) => setCapital(parseFloat(e.target.value))}
-                    fullWidth
-                    required
-                  />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <TextField
-                    label="Annual Expense"
-                    type="number"
-                    value={annualExpense}
-                    onChange={(e) => setAnnualExpense(parseFloat(e.target.value))}
-                    fullWidth
-                    required
-                  />
-                </Grid>
-                <Grid item xs={12} md={3}>
-                  <TextField
-                    label="Dividend Yield"
-                    type="number"
-                    value={dividendYield}
-                    onChange={(e) => setDividendYield(parseFloat(e.target.value))}
-                    fullWidth
-                    required
-                    InputProps={{ endAdornment: '%' }}
-                  />
-                </Grid>
-                <Grid item xs={12} md={3}>
-                  <TextField
-                    label="Dividend Growth Rate"
-                    type="number"
-                    value={dividendGrowthRate}
-                    onChange={(e) => setDividendGrowthRate(parseFloat(e.target.value))}
-                    fullWidth
-                    required
-                    InputProps={{ endAdornment: '%' }}
-                  />
-                </Grid>
-                <Grid item xs={12} md={3}>
-                  <TextField
-                    label="Dividend Tax Rate"
-                    type="number"
-                    value={dividendTaxRate}
-                    onChange={(e) => setDividendTaxRate(parseFloat(e.target.value))}
-                    fullWidth
-                    required
-                    InputProps={{ endAdornment: '%' }}
-                  />
-                </Grid>
-                <Grid item xs={12} md={3}>
-                  <TextField
-                    label="Inflation Rate"
-                    type="number"
-                    value={inflationRate}
-                    onChange={(e) => setInflationRate(parseFloat(e.target.value))}
-                    fullWidth
-                    required
-                    InputProps={{ endAdornment: '%' }}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <FormControlLabel
-                    control={<Checkbox checked={isReinvesting} onChange={(e) => setIsReinvesting(e.target.checked)} />}
-                    label="Reinvesting dividends annually?"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Button type="submit" variant="contained" color="primary" size="large" fullWidth>
-                    Calculate
-                  </Button>
-                </Grid>
+      <Grid container spacing={2}>
+        <Paper>
+          <Box component="form" onSubmit={calculate}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  label="Capital"
+                  type="number"
+                  value={capital}
+                  onChange={(e) => setCapital(parseFloat(e.target.value))}
+                  fullWidth
+                  required
+                />
               </Grid>
-            </Box>
-          </Paper>
-        </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  label="Annual Expense"
+                  type="number"
+                  value={annualExpense}
+                  onChange={(e) => setAnnualExpense(parseFloat(e.target.value))}
+                  fullWidth
+                  required
+                />
+              </Grid>
+              <Grid item xs={12} md={3}>
+                <TextField
+                  label="Dividend Yield"
+                  type="number"
+                  value={dividendYield}
+                  onChange={(e) => setDividendYield(parseFloat(e.target.value))}
+                  fullWidth
+                  required
+                  slotProps={{
+                    input: {
+                      endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                    },
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} md={3}>
+                <TextField
+                  label="Dividend Growth Rate"
+                  type="number"
+                  value={dividendGrowthRate}
+                  onChange={(e) => setDividendGrowthRate(parseFloat(e.target.value))}
+                  fullWidth
+                  required
+                  slotProps={{
+                    input: {
+                      endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                    },
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} md={3}>
+                <TextField
+                  label="Dividend Tax Rate"
+                  type="number"
+                  value={dividendTaxRate}
+                  onChange={(e) => setDividendTaxRate(parseFloat(e.target.value))}
+                  fullWidth
+                  required
+                  slotProps={{
+                    input: {
+                      endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                    },
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} md={3}>
+                <TextField
+                  label="Inflation Rate"
+                  type="number"
+                  value={inflationRate}
+                  onChange={(e) => setInflationRate(parseFloat(e.target.value))}
+                  fullWidth
+                  required
+                  slotProps={{
+                    input: {
+                      endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                    },
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={<Checkbox checked={isReinvesting} onChange={(e) => setIsReinvesting(e.target.checked)} />}
+                  label="Reinvesting dividends annually?"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Button type="submit" variant="contained" color="primary" size="large" fullWidth>
+                  Calculate
+                </Button>
+              </Grid>
+            </Grid>
+          </Box>
+        </Paper>
 
         {dividendsSummary && (
           <Grid item xs={12}>
-            <Paper sx={{ width: '100%' }}>
-              <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2 }}>
+            <Paper>
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Button onClick={exportCSV} variant="contained">
                   Export
                 </Button>
@@ -237,7 +251,7 @@ const Calculator = () => {
           </Grid>
         )}
       </Grid>
-    </Container>
+    </Box >
   );
 };
 

@@ -2,6 +2,7 @@ import pluginJs from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import nextPlugin from '@next/eslint-plugin-next';
 import pluginReact from 'eslint-plugin-react';
+import pluginImport from 'eslint-plugin-import';
 import globals from 'globals';
 
 export default [
@@ -30,6 +31,7 @@ export default [
     plugins: {
       "@next/next": nextPlugin,
       react: pluginReact,
+      import: pluginImport,
     },
     rules: {
       ...nextPlugin.configs.recommended.rules,
@@ -38,11 +40,27 @@ export default [
       "react/prop-types": "off",
       "react/react-in-jsx-scope": "off",
       "react/no-unescaped-entities": "off",
+      "import/order": [
+        "error",
+        {
+          "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+          "newlines-between": "always",
+          "alphabetize": {
+            "order": "asc",
+            "caseInsensitive": true
+          }
+        }
+      ]
     },
     settings: {
       react: {
         version: 'detect',
       },
+      "import/resolver": {
+        "node": {
+          "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        }
+      }
     },
   },
 ];

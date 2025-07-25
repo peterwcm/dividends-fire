@@ -1,6 +1,6 @@
-import { AppBar, Toolbar, Typography, Container } from '@mui/material';
-import Link from 'next/link';
+import { AppBar, Toolbar, Container } from '@mui/material';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Header = () => {
   return (
