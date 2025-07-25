@@ -1,6 +1,5 @@
 'use client';
 import Calculator from '../components/Calculator';
-import { Card } from 'primereact/card';
 
 const Home = () => {
   return (
@@ -27,9 +26,9 @@ const Home = () => {
         {' '}to find the necessary metrics for your calculations.
       </p>
 
-      <Card>
+      <div className="bg-white shadow-md rounded-lg p-6">
         <Calculator />
-      </Card>
+      </div>
 
       <h2>Disclaimer</h2>
       <p>

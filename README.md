@@ -6,7 +6,7 @@ A web based calculator that estimates how long it might take to retire using a d
 
 ## Features
 
-- Built with [Next.js 15](https://nextjs.org/) and [PrimeReact](https://primereact.org/) components
+- Built with [Next.js 15](https://nextjs.org/)
 - Utilizes Static Site Generation (SSG) for fast loading and improved SEO
 - Simple form to calculate years to financial independence
 
@@ -41,4 +41,3 @@ yarn build
 ## Disclaimer
 
 This project is for educational purposes only and should not be considered financial advice.
-
