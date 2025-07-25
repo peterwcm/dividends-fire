@@ -38,7 +38,7 @@ const Home = () => {
         {' '}to find the necessary metrics for your calculations.
       </Typography>
 
-      <Paper elevation={3} sx={{ p: 3, mb: 4 }}>
+      <Paper elevation={5} sx={{ p: 3, mb: 4 }}>
         <Calculator />
       </Paper>
 

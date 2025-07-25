@@ -106,118 +106,116 @@ const Calculator = () => {
 
   return (
     <Box>
-      <Typography component="h4">
+      <Typography variant="h4">
         FIRE Calculator
       </Typography>
-      <Grid container spacing={2}>
-        <Paper>
-          <Box component="form" onSubmit={calculate}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={6}>
-                <TextField
-                  label="Capital"
-                  type="number"
-                  value={capital}
-                  onChange={(e) => setCapital(parseFloat(e.target.value))}
-                  fullWidth
-                  required
-                />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <TextField
-                  label="Annual Expense"
-                  type="number"
-                  value={annualExpense}
-                  onChange={(e) => setAnnualExpense(parseFloat(e.target.value))}
-                  fullWidth
-                  required
-                />
-              </Grid>
-              <Grid item xs={12} md={3}>
-                <TextField
-                  label="Dividend Yield"
-                  type="number"
-                  value={dividendYield}
-                  onChange={(e) => setDividendYield(parseFloat(e.target.value))}
-                  fullWidth
-                  required
-                  slotProps={{
-                    input: {
-                      endAdornment: <InputAdornment position="end">%</InputAdornment>,
-                    },
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12} md={3}>
-                <TextField
-                  label="Dividend Growth Rate"
-                  type="number"
-                  value={dividendGrowthRate}
-                  onChange={(e) => setDividendGrowthRate(parseFloat(e.target.value))}
-                  fullWidth
-                  required
-                  slotProps={{
-                    input: {
-                      endAdornment: <InputAdornment position="end">%</InputAdornment>,
-                    },
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12} md={3}>
-                <TextField
-                  label="Dividend Tax Rate"
-                  type="number"
-                  value={dividendTaxRate}
-                  onChange={(e) => setDividendTaxRate(parseFloat(e.target.value))}
-                  fullWidth
-                  required
-                  slotProps={{
-                    input: {
-                      endAdornment: <InputAdornment position="end">%</InputAdornment>,
-                    },
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12} md={3}>
-                <TextField
-                  label="Inflation Rate"
-                  type="number"
-                  value={inflationRate}
-                  onChange={(e) => setInflationRate(parseFloat(e.target.value))}
-                  fullWidth
-                  required
-                  slotProps={{
-                    input: {
-                      endAdornment: <InputAdornment position="end">%</InputAdornment>,
-                    },
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox checked={isReinvesting} onChange={(e) => setIsReinvesting(e.target.checked)} />}
-                  label="Reinvesting dividends annually?"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Button type="submit" variant="contained" color="primary" size="large" fullWidth>
-                  Calculate
-                </Button>
-              </Grid>
-            </Grid>
-          </Box>
-        </Paper>
+      <Box component="form" onSubmit={calculate} sx={{ mb: 4 }}>
+        <Grid container spacing={2}>
+          <Grid size={6}>
+            <TextField
+              label="Capital"
+              type="number"
+              value={capital}
+              onChange={(e) => setCapital(parseFloat(e.target.value))}
+              fullWidth
+              required
+            />
+          </Grid>
+          <Grid size={6}>
+            <TextField
+              label="Annual Expense"
+              type="number"
+              value={annualExpense}
+              onChange={(e) => setAnnualExpense(parseFloat(e.target.value))}
+              fullWidth
+              required
+            />
+          </Grid>
+          <Grid size={{ xs: 6, md: 3 }}>
+            <TextField
+              label="Dividend Yield"
+              type="number"
+              value={dividendYield}
+              onChange={(e) => setDividendYield(parseFloat(e.target.value))}
+              fullWidth
+              required
+              slotProps={{
+                input: {
+                  endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                },
+              }}
+            />
+          </Grid>
+          <Grid size={{ xs: 6, md: 3 }}>
+            <TextField
+              label="Dividend Growth Rate"
+              type="number"
+              value={dividendGrowthRate}
+              onChange={(e) => setDividendGrowthRate(parseFloat(e.target.value))}
+              fullWidth
+              required
+              slotProps={{
+                input: {
+                  endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                },
+              }}
+            />
+          </Grid>
+          <Grid size={{ xs: 6, md: 3 }}>
+            <TextField
+              label="Dividend Tax Rate"
+              type="number"
+              value={dividendTaxRate}
+              onChange={(e) => setDividendTaxRate(parseFloat(e.target.value))}
+              fullWidth
+              required
+              slotProps={{
+                input: {
+                  endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                },
+              }}
+            />
+          </Grid>
+          <Grid size={{ xs: 6, md: 3 }}>
+            <TextField
+              label="Inflation Rate"
+              type="number"
+              value={inflationRate}
+              onChange={(e) => setInflationRate(parseFloat(e.target.value))}
+              fullWidth
+              required
+              slotProps={{
+                input: {
+                  endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                },
+              }}
+            />
+          </Grid>
+          <Grid size={12}>
+            <FormControlLabel
+              control={<Checkbox checked={isReinvesting} onChange={(e) => setIsReinvesting(e.target.checked)} />}
+              label="Reinvesting dividends annually?"
+            />
+          </Grid>
+          <Grid size={12}>
+            <Button type="submit" variant="contained" color="primary" size="large" fullWidth>
+              Calculate
+            </Button>
+          </Grid>
+        </Grid>
+      </Box>
 
-        {dividendsSummary && (
-          <Grid item xs={12}>
-            <Paper>
-              <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+      {dividendsSummary && (
+        <Grid container>
+          <Grid size={12}>
+            <Paper elevation={3}>
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2 }}>
                 <Button onClick={exportCSV} variant="contained">
                   Export
                 </Button>
               </Box>
-              <TableContainer ref={dt} sx={{ width: '100%' }}>
-                <Table sx={{ minWidth: 650, width: '100%' }} aria-label="simple table">
+              <TableContainer ref={dt}>
+                <Table>
                   <TableHead>
                     <TableRow>
                       <TableCell>Year</TableCell>
@@ -249,8 +247,8 @@ const Calculator = () => {
               </TableContainer>
             </Paper>
           </Grid>
-        )}
-      </Grid>
+        </Grid>
+      )}
     </Box >
   );
 };
