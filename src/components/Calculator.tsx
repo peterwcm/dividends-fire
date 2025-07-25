@@ -105,7 +105,7 @@ const Calculator = () => {
   };
 
   return (
-    <Container maxWidth="lg" sx={{ py: 6 }}>
+    <Container sx={{ py: 6 }}>
       <Typography variant="h4" component="h1" gutterBottom>
         FIRE Calculator
       </Typography>
@@ -196,14 +196,14 @@ const Calculator = () => {
 
         {dividendsSummary && (
           <Grid item xs={12}>
-            <Paper>
+            <Paper sx={{ width: '100%' }}>
               <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2 }}>
                 <Button onClick={exportCSV} variant="contained">
                   Export
                 </Button>
               </Box>
-              <TableContainer component={Paper} ref={dt}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableContainer ref={dt} sx={{ width: '100%' }}>
+                <Table sx={{ minWidth: 650, width: '100%' }} aria-label="simple table">
                   <TableHead>
                     <TableRow>
                       <TableCell>Year</TableCell>

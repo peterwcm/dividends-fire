@@ -29,7 +29,7 @@ export default function RootLayout({ children }: {
           <ThemeProvider theme={theme}>
             <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
               <Header />
-              <Container component="main" sx={{ flexGrow: 1, py: 4 }}>
+              <Container maxWidth="lg" component="main" sx={{ flexGrow: 1, py: 4 }}>
                 {children}
               </Container>
               <Footer />
